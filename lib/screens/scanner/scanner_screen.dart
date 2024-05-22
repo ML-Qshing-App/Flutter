@@ -41,7 +41,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 borderLength: 30,
                 borderWidth: 10,
                 borderRadius: 10,
-                cutOutSize: 300,
+                cutOutSize: 400,
               ),
             ),
           ),
