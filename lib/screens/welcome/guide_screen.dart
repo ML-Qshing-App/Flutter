@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qrgard/screens/welcome/welcome_screen.dart';
-import 'package:qrgard/utilities/color/colors.dart';
 
 class GuideScreen extends StatelessWidget {
   const GuideScreen({super.key});
@@ -20,7 +19,7 @@ class FirstGuide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: const Center(
         child: Text('가이드1'),
       ),
       floatingActionButton: FloatingActionButton(
@@ -30,7 +29,7 @@ class FirstGuide extends StatelessWidget {
             MaterialPageRoute(builder: (_) => const SecondGuide()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -42,7 +41,7 @@ class SecondGuide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: const Center(
         child: Text('가이드2'),
       ),
       floatingActionButton: FloatingActionButton(
@@ -52,7 +51,7 @@ class SecondGuide extends StatelessWidget {
             MaterialPageRoute(builder: (_) => const WelcomeScreen()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
