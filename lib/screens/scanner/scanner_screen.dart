@@ -16,7 +16,6 @@ class ScannerScreen extends StatefulWidget {
 class _ScannerScreenState extends State<ScannerScreen> {
   late QRViewController _controller;
   final GlobalKey _qrKey = GlobalKey(debugLabel: 'QR');
-  String? _lastScannedData;
   bool _isDialogOpen = false;
   bool _canScan = true;
 
@@ -75,7 +74,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
 
   void fetchDataFromServer(String qrData) async {
     _canScan = false;
-    var url = Uri.parse('http://kairoshk.ddns.net:8080/url_ai/?data=');
+    var url = Uri.parse('http://kairoshk.ddns.net:8080/url_ai/?data=$qrData');
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -86,12 +85,12 @@ class _ScannerScreenState extends State<ScannerScreen> {
       } else if (responseData['result'] == 0) {
         _QshingDialog(qrData);
       }
-      _lastScannedData = qrData;
     } else {
       _errorDialog();
     }
   }
 
+  // error 팝업창
   void _errorDialog() {
     showDialog(
       context: context,
@@ -117,6 +116,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
     );
   }
 
+  // 큐싱 팝업창
   void _QshingDialog(String data) {
     _isDialogOpen = true;
     bool isValidUrl = RegExp(
@@ -209,9 +209,11 @@ class _ScannerScreenState extends State<ScannerScreen> {
     );
   }
 
+  // 일반 팝업창
   void _showDialog(String data) {
     _isDialogOpen = true;
     bool isValidUrl = RegExp(
+      // 정규식
       r'^(https?:\/\/)?'
       r'([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}'
       r'(:\d+)?(\/[^\s]*)?$',
