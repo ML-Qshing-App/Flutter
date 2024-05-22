@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qrgard/screens/welcome/welcome_screen.dart';
+import 'package:qrgard/utilities/color/colors.dart';
 
 class GuideScreen extends StatelessWidget {
   const GuideScreen({super.key});
