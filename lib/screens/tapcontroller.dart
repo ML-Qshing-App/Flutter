@@ -34,16 +34,17 @@ class _TapControllerState extends State<TapController>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: BACKGROUND_COLOR,
         title: Text(
           currentTabTitle,
-          style: TextStyle(
+          style: const TextStyle(
             color: FIRST_COLOR,
           ),
         ),
         centerTitle: true,
         bottom: TabBar(
-          overlayColor: MaterialStatePropertyAll(
+          overlayColor: const WidgetStatePropertyAll(
             Colors.transparent,
           ),
           controller: _tabController,

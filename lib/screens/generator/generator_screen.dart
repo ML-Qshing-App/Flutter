@@ -54,7 +54,8 @@ class _GeneratorScreenState extends State<GeneratorScreen> {
                         borderSide: BorderSide(color: FIRST_COLOR), // 밑줄 색상 변경
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: FIRST_COLOR), // focus되었을 때의 밑줄 색상 변경
+                        borderSide: BorderSide(
+                            color: FIRST_COLOR), // focus되었을 때의 밑줄 색상 변경
                       ),
                     ),
                     style: const TextStyle(color: FIRST_COLOR),
@@ -88,12 +89,16 @@ class _GeneratorScreenState extends State<GeneratorScreen> {
                     FocusScope.of(context).unfocus();
                   },
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(MediaQuery.of(context).size.width - 40, 50),
+                    minimumSize:
+                        Size(MediaQuery.of(context).size.width - 40, 50),
                     backgroundColor: FIRST_COLOR,
                   ),
-                  child: const Text('QR생성하기', style: TextStyle(
-                    color: BACKGROUND_COLOR,
-                  ),),
+                  child: const Text(
+                    'QR생성하기',
+                    style: TextStyle(
+                      color: BACKGROUND_COLOR,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -103,7 +108,8 @@ class _GeneratorScreenState extends State<GeneratorScreen> {
     );
   }
 
-  bool _isValidUrl(String url) { // 정규식
+  bool _isValidUrl(String url) {
+    // 정규식
     RegExp urlRegExp = RegExp(
       r'^(https?:\/\/)?'
       r'([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}'

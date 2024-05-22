@@ -1,14 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:qrgard/screens/welcome/welcome_screen.dart';
+import 'package:qrgard/utilities/color/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class GuideScreen extends StatelessWidget {
+class GuideScreen extends StatefulWidget {
   const GuideScreen({super.key});
 
   @override
+  _GuideScreenState createState() => _GuideScreenState();
+}
+
+class _GuideScreenState extends State<GuideScreen> {
+  bool _showGuideScreen = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkGuideStatus();
+  }
+
+  Future<void> _checkGuideStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool showGuideScreen = prefs.getBool('showGuideScreen') ?? true;
+    setState(() {
+      _showGuideScreen = showGuideScreen;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: BACKGROUND_COLOR,
+      ),
       debugShowCheckedModeBanner: false,
-      home: FirstGuide(),
+      home: _showGuideScreen ? const FirstGuide() : const WelcomeScreen(),
     );
   }
 }
@@ -23,7 +49,9 @@ class FirstGuide extends StatelessWidget {
         child: Text('가이드1'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setBool('showGuideScreen', false);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const SecondGuide()),
