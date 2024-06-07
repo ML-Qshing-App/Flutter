@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qrgard/screens/generator/generator_screen.dart';
 import 'package:qrgard/screens/scanner/scanner_screen.dart';
-import 'package:qrgard/screens/welcome/guide_screen.dart';
 import 'package:qrgard/utilities/color/colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class TapController extends StatefulWidget {
   const TapController({super.key});
@@ -32,15 +30,6 @@ class _TapControllerState extends State<TapController>
     });
   }
 
-  Future<void> _showGuideScreen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('showGuideScreen', true);
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const GuideScreen()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,14 +42,6 @@ class _TapControllerState extends State<TapController>
             color: FIRST_COLOR,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.help_outline, color: FIRST_COLOR),
-            onPressed: () {
-              _showGuideScreen();
-            },
-          ),
-        ],
         centerTitle: true,
         bottom: TabBar(
           overlayColor: const WidgetStatePropertyAll(

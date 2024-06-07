@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:qrgard/screens/welcome/guide_screen.dart';
+import 'package:qrgard/screens/tapcontroller.dart';
 import 'package:qrgard/utilities/color/colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
       const Duration(seconds: 3),
       () {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const GuideScreen()),
+          MaterialPageRoute(builder: (_) => const TapController()),
         );
       },
     );

@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
 class ScannerScreen extends StatefulWidget {
-  const ScannerScreen({Key? key}) : super(key: key);
+  const ScannerScreen({super.key});
 
   @override
   State<ScannerScreen> createState() => _ScannerScreenState();
@@ -40,8 +40,9 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 borderColor: FIRST_COLOR,
                 borderLength: 30,
                 borderWidth: 10,
+                cutOutBottomOffset: 15,
                 borderRadius: 10,
-                cutOutSize: 400,
+                cutOutSize: MediaQuery.of(context).size.width / 1.8,
               ),
             ),
           ),
@@ -117,6 +118,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   }
 
   // 큐싱 팝업창
+  // ignore: non_constant_identifier_names
   void _QshingDialog(String data) {
     _isDialogOpen = true;
     bool isValidUrl = RegExp(
@@ -125,7 +127,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
       r'(:\d+)?(\/[^\s]*)?$',
     ).hasMatch(data);
 
-    String dialogContent = isValidUrl ? '$data' : '올바른 주소가 아닙니다';
+    String dialogContent = isValidUrl ? data : '올바른 주소가 아닙니다';
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -137,7 +139,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: Container(
+          content: SizedBox(
             height: MediaQuery.of(context).size.height / 6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -219,7 +221,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
       r'(:\d+)?(\/[^\s]*)?$',
     ).hasMatch(data);
 
-    String dialogContent = isValidUrl ? '$data' : '올바른 주소가 아닙니다';
+    String dialogContent = isValidUrl ? data : '올바른 주소가 아닙니다';
 
     showDialog(
       context: context,
@@ -232,7 +234,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: Container(
+          content: SizedBox(
             height: MediaQuery.of(context).size.height / 6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -304,7 +306,9 @@ class _ScannerScreenState extends State<ScannerScreen> {
 }
 
 void _launchURL(String url) async {
+  // ignore: deprecated_member_use
   if (await canLaunch(url)) {
+    // ignore: deprecated_member_use
     await launch(url);
   } else {
     throw 'Could not launch $url';
